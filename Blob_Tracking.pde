@@ -59,7 +59,7 @@ void setup() {
   opencv = new OpenCV(this, vWidth, vHeight);
   contours = new ArrayList<Contour>();
   
-  size(920, 680, P2D);
+  size(920, 480, P2D);
   
   // Blobs list
   blobList = new ArrayList<Blob>();
@@ -192,18 +192,18 @@ void displayImages() {
   scale(0.5);
   image(video, 0, 0);
   image(preProcessedImage, video.width, 0);
-  image(processedImage, 0, video.height);
+  //image(processedImage, 0, video.height);
+  stroke(getFlowStroke());
+  translate(0, video.height);
+  opencv.drawOpticalFlow();
   translate(0, -video.height);
   image(video, video.width, video.height);
   
-  translate(-200, video.height);
-  stroke(getFlowStroke());
-  //opencv.drawOpticalFlow();
-  for(Blob b : blobList){
-     Rectangle r = b.getBoundingBox();
-     translate(r.width,0);
-     opencv.drawOpticalFlow(r.x,r.y,r.width,r.height); 
-  }
+//  for(Blob b : blobList){
+//     Rectangle r = b.getBoundingBox();
+//     translate(r.width,0);
+//     opencv.drawOpticalFlow(r.x,r.y,r.width,r.height); 
+//  }
   
   popMatrix();
   
@@ -488,3 +488,5 @@ void setLock(Controller theController, boolean theValue) {
     theController.setColorForeground(color(buttonColor));
   }
 }
+
+
